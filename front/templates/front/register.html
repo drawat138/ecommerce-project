@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load static %}
+  <div class="row" style="background-image: url({% static 'images/444.jpg' %}); height: 1000px; max-width: 100%; ">>
+    <div class="col-md-6 offset-md-3"  style="margin-top:0px; 
+            background-image: url({% static 'images/444.jpg' %});"> 
+      <div style=" padding:25px; border:2px solid black; border-radius:30px;" > 
+
+   <h2 style="text-align:center; color:yellow; font-size:45px"> REGISTER </h2>
+
+  <form method="post" style="color: white; font-size: 20px"> 
+    {% csrf_token  %}
+     {{form.as_p}}
+<input type="submit" class="btn btn-success" style="float: right ; font-size:20px; font-weight: solid" 
+name="submit" value="Register">
+     </form>
+   </div>
+  </div>
+</div>
+{% endblock%}

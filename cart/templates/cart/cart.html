@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+    {% block content %}
+    {% load static %}
+<style>  
+th{
+  font-size: 20px;
+  color: white;
+}
+td{
+  font-size: 18px;
+  color: white;
+}
+ tr:hover{
+  background-color:#1a1a1a;
+}
+</style>
+ <body style="background-image: url({% static 'images/black.jpg' %}); width: 100%;"> 
+   <h2 align="center" style="color: #66c2ff; font-size: 40px; font-family: Montserrat; font-style: bold"> SHOPPING <span style="color: #44cc00"> CART </span>  
+      <img src="{% static 'images/boy.gif' %}"height="100px"> 
+  </h2> 
+<div class="container" style="margin-top: 10px">
+<table class="table  table-bordered" style="background-image: url({% static 'images/carttexture.jpeg'%}); width: 100%;">
+  <thead >
+    <tr>
+      <th scope="col">S.No</th>
+      <th scope="col"> Product Image</th>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for product in cart.products.all  %}
+    <tr>
+      <th scope="row">1</th>
+       <td><img src="{{product.productimage.url}}" width="80px" height="80px"> </td> 
+      <td>{{product.title }}</td>
+      <td>{{ product.price }}</td>
+    </tr>
+     {% endfor %}
+    <tr>
+        <td colspan="3">Subtotal</td>
+        <td colspan="2">{{ cart.subtotal }}</td>
+    </tr>
+    <tr>
+       <td colspan="3">Total</td>
+       <td colspan="2">{{ cart.total}}</td>
+    </tr>
+    <tr>
+      <td colspan="5">
+        <a href="/checkout" style="color:white; font-size: 20px;"> 
+          <button class=" btn btn-success" style="float: right;"> Check out </a>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</body>
+{% endblock  %}

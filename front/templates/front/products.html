@@ -1,0 +1,71 @@
+{% extends 'base/base.html' %}
+{% block content  %}
+<style>
+ #price{
+       font-size:22px;
+       text-align: center; 
+       color:#000000
+       } 
+
+  .sidenav{
+    color:black; 
+    font-size: 20px;
+    text-decoration:none;
+  }  
+  .sidenav:hover{
+    color:grey;
+    font-weight: 700;
+    text-decoration: none;
+  }
+ .product-list{
+   color:orange;
+   font-weight:900;
+   font-size:25px;
+   text-decoration: none;
+  font-family: Modak;
+  }
+ </style>
+<body style="background-color:#1a1a1a "> 
+<div class="row">
+	<div class="col-md-2"> 
+
+ <div class="card" style="width: 16rem;">
+  <div class="card-header">
+   <p><a href="/products" class="product-list">PRODUCTS LIST </a></p>
+  </div>
+      {% for subcategory in subcategories  %}
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"> 
+   <p> <a class="sidenav" href="/productbycategory/{{subcategory.id}}">
+           {{subcategory}}</a> </p>
+
+    </li>
+
+  </ul>
+          {% endfor %}
+</div>
+
+
+
+
+    </div>
+<div class="col-md-10"> 
+    <div class="row"> 
+
+                                 {% for product in products %}
+      <div class="col-md-3" > 
+        <div class="card" style="width:100%; background-color:#f2f2f2;color:black;">
+          <img src="{{ product.productimage.url}}" class="card-img-top" alt="...">
+           <div class="card-body">
+            <p class="card-text" id="price"> &#8377; {{product.price}}</p> 
+            <a href="/productdetails/{{product.id}}" class="btn btn-primary" style="font-size: 20px;">View Details</a>
+          </div>
+        </div>  	 
+     </div>
+
+                                         {% endfor%}
+</div>
+</div>
+</div>
+                                         {% endblock %}
+</body>

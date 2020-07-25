@@ -1,0 +1,65 @@
+<style>  
+#big{
+  color: white;
+  font-weight: solid;
+  font-family:Georgia, serif;
+  font-size: 20px;
+}
+#big:hover{
+  color:#e6e6e6;
+  font-size: 13px;
+  border-right:1px;
+  box-shadow: 2px 3px #f4f2f0;
+}
+
+</style>
+
+<nav class="navbar navbar-expand-lg" style="background-color: #00001a;">
+  <a class="navbar-brand" href="/products" style="font-size: 25px;" > 
+   <span style="color:#ff1a1a;">Shop</span>ping <span style="color:#f2f20d; background-color: blue ">M</span>all </a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" id="big" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="big" href="/products">Products</a>
+      </li>
+  {% if 'username' not in request.session %}
+      <li class="nav-item">
+        <a class="nav-link" id="big" href="/login">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="big" href="/register">Register</a>
+      </li>
+  {% endif %}
+
+                
+                      {% if 'username' in request.session %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="big">
+                       {{ request.session.username }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">forget password</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout"> logout </a>
+        </div>
+      </li>
+                                   {% endif %}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" id="big">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/search/">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="search" value="{{request.GET.search}}" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

@@ -1,0 +1,65 @@
+{% load static %}
+<style> 
+  .timer{
+             /*text-align:right;*/
+          }
+#title{
+background-color:#000a1a; 
+color: white; 
+ 
+}
+</style>
+<div class="jumbotron-fluid" id="title" >
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6" align="center">
+<h1 class="display-4 text-center">  
+<span style="color:#ff1a1a">Shop</span>ping <span style="color:#f2f20d; background-color:blue">M</span>all
+    <img src="{% static 'images/Specialoffer.gif'%}" width="100px" height="70px">     
+</h1>
+</div>
+<div class="col-md-3"></div>
+</div>
+<div class="row"  style="background-color: ">
+<div class="col-md-6">
+ <p style="font-weight: solid; font-size: 15px;">
+  <span style="font-style: italic; padding-left: 40px;"> Special offer:</span>
+        <marquee width="90%" direction="right"  >
+        10% Discount: for HDFC or SBI bank credits card holders.<br>
+        5% Discount : for Bank of borada debit and cerdits card holders.   
+         </marquee> </p> 
+    </div>
+    <div class="col-md-6">
+      <h2 class="timer"><time>00:00:00</time></h2>  
+    </div>
+  </div>
+
+     </div>
+  </div>
+
+
+<script> 
+var h2 = document.getElementsByTagName('h2')[0],
+         seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h2.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+</script>

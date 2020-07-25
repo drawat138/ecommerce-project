@@ -1,0 +1,94 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load static %}
+<style>
+  #gradient {
+  background-color: red;
+  background-image:
+    linear-gradient(
+      to right, 
+      red, 
+      #f06d06, 
+      rgb(255, 255, 0), 
+      green
+    );
+}
+  
+.blinking{
+    animation:blinkingText 1.2s infinite;
+
+}
+@keyframes blinkingText{
+     0%{     color: #cc0000; }
+    99%{    color:transparent;  }
+    88%{   color: #ffffff;    }
+    49%{    color: yellow; }
+    60%{    color: transparent; }
+    98%{   color: red;    }
+    99%{    color:transparent; }
+
+}
+
+</style>
+<div class="row" style="background-color: #0d0d0d">
+    <div class="col-md-4">
+    <img src="{{product.productimage.url}}" width="100%">
+    </div>
+      <div class="col-md-4" style="background-image: url({% static 'images/grad.jpg' %}); width: 100%;">
+         <h3 style=" font-size:50px; color:#f2f2f2; text-align: center; padding-top: 50px;">  {{product.title}}<br> </h3>
+
+         <!-- <p style="color: green; margin-top: 10px; font-size: 20px">  {{product.price}} Rs<br> </p> -->
+         <span class="blinking" 
+              style="color:white;
+                    padding-left: 40px; 
+                     margin-top: 10px; 
+                     font-size: 30px;">  {{product.price}} Rs<br> </span>
+          <h3 style=" color:#ffff1a; font-family: sans-serif; text-align: center"> Speciations:</h3>
+         <p style="margin-top: 10px; color:white; font-size: 20px;">  {{product.description}} <br> </p>
+        <form method="POST" action="/cartupdate/">
+             {% csrf_token %}
+               <input type="hidden" name="product_id" value="{{product.id}}">
+                 {% if product in cart.products.all  %}
+                   <div class="btn-group"> 
+                     <a href="/cart" class="btn btn-link"> In cart </a>
+                       <button type="submit" class="btn btn-danger"> Remove </button> 
+                   </div>
+                        {% else  %}
+                      <button type="submit" class="btn btn-success" style="float: right;"> Add to cart </button>
+                         {% endif  %}
+       </form>
+      </div>
+      
+  <div class="col-md-4" style="background-image: url({% static 'images/crop.jfif' %}); width: 100%;">
+   	<form method="post" style="font-size: 25px; color: white; "> 
+      <h2 style="text-align: center; color:white ; padding: 30px;">  Review Form </h2>
+         {% csrf_token  %}
+         {{reviewform.as_p}}
+     <input type="submit" class="btn btn-success" style="float: right" name="submit" value="submit">
+    </form>
+   </div>
+  </div>
+ 
+<div class="row"> 
+  <div class="col-md-8"> 
+  {% for review in reviews %} 
+    <blockquote class="blockquote text-right">
+     <p class="mb-0"> {{review.description}}</p><footer class="blockquote-footer">  {{review.review_by}} 
+      <cite title="Source Title"></cite></footer>
+    </blockquote> 
+{% endfor%}
+</div>
+</div>
+
+<div class="row">
+ <div class="container-fluid">
+   <h3 align="center" style="color: red; font-family: sans-serif; margin-top: 20px"> Similar categories  </h3>
+
+
+
+    
+  </div>
+ </div>
+
+
+{% endblock %}
